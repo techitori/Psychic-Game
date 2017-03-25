@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Scope</title>
+</head>
+<body>
+
+  <div id=gameTitle>
+    <h1>The Psychic Game</h1>
+    <h3>Guess what letter I'm thinking of</h3>
+  </div>
+  
+  <div id=game>
+    <p>Click a letter to get started!</p>
+  </div>
+
+  
+  <script type="text/javascript">
+
+  var computerChoices = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
+  
+  // Variables for tracking our wins, losses and ties. They begin at 0.
+  var wins = 0;
+  var losses = 0;
+  var guesses = 9;
+  
+  // When the user presses a key, it will run the following function...
+  document.onkeypress = function(event) {
+
+  // Determine which key was pressed
+  var userGuess = event.key;
+  
+  console.log(userGuess);
+
+  // Sets the computerGuess variable equal to a random choice from the computerChoice array.
+  var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+
+//Determine if input is an alpha value
+  
+  if (event.keyCode>= 97 && event.keyCode <= 122)  {
+        
+          // This logic determines the outcome of the game (win/loss/tie), and increments the appropriate counter.
+          if (userGuess === computerGuess) {
+            wins++;
+            guesses--;
+          }
+          else if (userGuess !== computerGuess ) {
+            losses++;
+            guesses--;
+          }
+
+          if (guesses === 0) {
+            alert("Game Over!");
+          }
+        // Here we create the HTML that will be injected into our div and displayed on the page.
+          var html = 
+          "<p>Wins: " + wins + "</p>" +
+          "<p>Losses: " + losses + "</p>" +
+          "<p>Guesses Left: " + guesses + "</p>";
+          
+
+          // Injecting the HTML we just created into our div and updating the game information on our page.
+          document.getElementById("game").innerHTML = html;
+
+          
+        }
+      };
+
+
+</script>
+
+</body>
+</html>
